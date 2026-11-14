@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111d">
+  <meta name="description" content="마우스로 돌려 보는 인터랙티브 지구와 세계의 랜드마크">
+  <title>지도 앱 — 세계를 한눈에</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main>
+  <section class="welcome" id="welcome" aria-labelledby="welcome-title">
+    <div class="welcome-top"><span class="brand-mark" aria-hidden="true">◎</span> 지도 앱</div>
+    <div class="welcome-copy">
+      <span class="eyebrow">YOUR WINDOW TO THE WORLD</span>
+      <h1 id="welcome-title">세상을 돌려,<br><span>새로운 곳을 만나보세요.</span></h1>
+      <p>손끝으로 지구를 돌리고, 세계 곳곳의 랜드마크를 찾아보세요.</p>
+      <button class="primary-button" id="start-button" type="button">지구 만나기 <span aria-hidden="true">↗</span></button>
+    </div>
+    <div class="welcome-globe" aria-hidden="true">
+      <div class="welcome-orbit orbit-one"></div><div class="welcome-orbit orbit-two"></div><div class="welcome-planet"></div>
+    </div>
+    <div class="welcome-footer"><span>지구를 바라보는 새로운 방법</span><span>01 — ∞</span></div>
+  </section>
+
+  <section class="explorer" id="explorer" aria-label="세계 지도 탐험" hidden>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="지도 앱 시작 화면으로 이동"><span class="brand-mark" aria-hidden="true">◎</span><span>지도 앱</span></a>
+      <span class="topbar-caption">세계를 한눈에, 나만의 속도로</span>
+      <button class="text-button" id="home-button" type="button"><span aria-hidden="true">↖</span> 처음으로</button>
+    </header>
+    <div class="explorer-layout">
+      <aside class="sidebar" aria-label="랜드마크 탐색">
+        <div class="sidebar-heading">
+          <span class="eyebrow">WORLD ATLAS</span>
+          <h1>어디로 떠나볼까요?</h1>
+          <p>대륙을 고르거나, 가고 싶은 곳을 검색해 보세요.</p>
+        </div>
+        <label class="search-box">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <span class="visually-hidden">나라 또는 랜드마크 검색</span>
+          <input id="search-input" type="search" placeholder="나라 또는 랜드마크 검색" autocomplete="off">
+          <kbd>/</kbd>
+        </label>
+        <div class="section-label"><span>대륙 둘러보기</span><span class="section-count">06</span></div>
+        <nav class="continent-list" aria-label="대륙 선택">
+          <button class="continent-button is-active" data-continent="all" type="button"><span class="continent-icon">✳</span><span>모든 대륙</span><span class="continent-arrow">↗</span></button>
+          <button class="continent-button" data-continent="아시아" type="button"><span class="continent-icon">◒</span><span>아시아</span><span class="continent-arrow">↗</span></button>
+          <button class="continent-button" data-continent="유럽" type="button"><span class="continent-icon">◌</span><span>유럽</span><span class="continent-arrow">↗</span></button>
+          <button class="continent-button" data-continent="아프리카" type="button"><span class="continent-icon">◉</span><span>아프리카</span><span class="continent-arrow">↗</span></button>
+          <button class="continent-button" data-continent="북아메리카" type="button"><span class="continent-icon">◍</span><span>북아메리카</span><span class="continent-arrow">↗</span></button>
+          <button class="continent-button" data-continent="남아메리카" type="button"><span class="continent-icon">◒</span><span>남아메리카</span><span class="continent-arrow">↗</span></button>
+          <button class="continent-button" data-continent="오세아니아" type="button"><span class="continent-icon">◈</span><span>오세아니아</span><span class="continent-arrow">↗</span></button>
+        </nav>
+        <div class="landmark-heading"><div><span class="section-label">발견할 장소</span><span class="result-count" id="result-count"></span></div><span class="live-dot" aria-label="장소 목록"></span></div>
+        <div class="landmark-list" id="landmark-list" aria-live="polite"></div>
+        <p class="sidebar-note">장소를 누르면 지구가 그곳을 향해요.</p>
+      </aside>
+      <section class="globe-panel" aria-label="인터랙티브 지구본">
+        <div class="globe-topline"><span><span class="status-dot"></span> LIVE VIEW</span><span id="view-coordinates">지구 · 3D 탐험</span></div>
+        <div class="globe-stage">
+          <div class="star-field" aria-hidden="true"></div>
+          <canvas id="globe" aria-label="드래그하여 회전할 수 있는 지구본"></canvas>
+          <div class="globe-vignette" aria-hidden="true"></div>
+          <div class="globe-hint" id="globe-hint"><span class="hint-drag" aria-hidden="true">↔</span><span>드래그해서 지구를 돌려보세요</span></div>
+          <div class="globe-controls" aria-label="지구본 조작">
+            <button id="zoom-in" type="button" aria-label="확대">＋</button><span class="control-divider"></span>
+            <button id="zoom-out" type="button" aria-label="축소">−</button><span class="control-divider"></span>
+            <button id="reset-view" type="button" aria-label="지구본 초기화">⌂</button>
+          </div>
+          <div class="globe-scale"><span aria-hidden="true">🌐</span><span id="zoom-label">100%</span></div>
+        </div>
+        <div class="globe-bottomline"><span>지구의 어느 곳이든, 당신의 탐험이 시작되는 곳</span><span>휠을 움직여 확대 · 축소</span></div>
+      </section>
+    </div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
